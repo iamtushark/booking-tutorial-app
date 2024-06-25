@@ -5,21 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Box, Button, Typography } from '@mui/material';
 import CommonTextField from '../components/common/CommonTextField';
 import personalDetailSchema from '../validationSchema/personalDetailSchema';
-
-interface IFormInputs {
-  name: string;
-  email: string;
-  phone_num: number;
-  Address: string;
-}
+import { PersonalDetailInputs } from '../interfaces/formInterfaces';
 
 export default function PersonalDetails() {
-  const { handleSubmit, control, formState: { errors } } = useForm<IFormInputs>({
+  const { handleSubmit, control, formState: { errors } } = useForm<PersonalDetailInputs>({
     resolver: yupResolver(personalDetailSchema),
   });
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+  const onSubmit: SubmitHandler<PersonalDetailInputs> = (data) => {
     localStorage.setItem("name", data.name);
     navigate("/service_details");
   };
