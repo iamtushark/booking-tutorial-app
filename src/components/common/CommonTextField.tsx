@@ -1,5 +1,5 @@
-import React from 'react';
-import TextField from '@mui/material/TextField';
+import React from "react";
+import TextField from "@mui/material/TextField";
 
 interface CommonTextFieldProps {
   label: string;
@@ -10,22 +10,23 @@ interface CommonTextFieldProps {
   helperText?: string;
 }
 
-const CommonTextField = React.forwardRef<HTMLInputElement, CommonTextFieldProps>(
-  ({ label, value, onChange, onBlur, error, helperText }, ref) => {
-    return (
-      <TextField
-        label={label}
-        variant="filled"
-        value={value}
-        onChange={onChange}
-        onBlur={onBlur}
-        error={error}
-        helperText={helperText}
-        fullWidth
-        inputRef={ref}
-      />
-    );
-  }
-);
+const CommonTextField = React.forwardRef<
+  HTMLInputElement,
+  CommonTextFieldProps
+>(({ label, value, onChange, onBlur, error, helperText }, ref) => {
+  return (
+    <TextField
+      label={label}
+      variant="filled"
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+      error={error}
+      helperText={helperText}
+      fullWidth
+      inputRef={ref}
+    />
+  );
+});
 
 export default CommonTextField;

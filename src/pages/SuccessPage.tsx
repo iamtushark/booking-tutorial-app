@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Box, Typography } from '@mui/material';
+import React from "react";
+import { Container, Box, Typography } from "@mui/material";
 
 export default function SuccessPage() {
   const name = localStorage.getItem("name");
@@ -8,7 +8,7 @@ export default function SuccessPage() {
 
   return (
     <Container maxWidth="sm">
-      <Box sx={{ mt: 5, textAlign: 'center' }}>
+      <Box sx={{ mt: 5, textAlign: "center" }}>
         <Typography variant="h4" gutterBottom>
           Booking Confirmation
         </Typography>
