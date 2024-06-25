@@ -6,29 +6,18 @@ import { Container, Box, Button, Typography } from '@mui/material';
 import CommonDropdown from '../components/common/CommonDropDownField';
 import CommonDateField from '../components/common/CommonDateFIeld';
 import bookingDetailSchema from '../validationSchema/bookingDetailSchema';
+import { BookingDetailInputs } from '../interfaces/formInterfaces';
+import { generateTimeSlots } from '../utils/time';
 
-interface IFormInputs {
-  appointment_date: Date;
-  appointment_time: string;
-}
-
-const generateTimeSlots = () => {
-  const times = [];
-  for (let hour = 0; hour < 24; hour++) {
-    times.push(`${hour.toString().padStart(2, '0')}:00`);
-    times.push(`${hour.toString().padStart(2, '0')}:30`);
-  }
-  return times;
-};
 
 export default function ServiceDetails() {
-  const { handleSubmit, control, formState: { errors } } = useForm<IFormInputs>({
+  const { handleSubmit, control, formState: { errors } } = useForm<BookingDetailInputs>({
     resolver: yupResolver(bookingDetailSchema),
-    defaultValues : {appointment_time : "00:30"}
+    defaultValues: { appointment_time: "00:30" }
   });
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => {
+  const onSubmit: SubmitHandler<BookingDetailInputs> = (data) => {
     localStorage.setItem("appointment_time", data.appointment_time);
     localStorage.setItem("appointment_date", data.appointment_date.toDateString());
     navigate("/success");

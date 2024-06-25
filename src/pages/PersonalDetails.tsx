@@ -6,12 +6,22 @@ import { Container, Box, Button, Typography } from '@mui/material';
 import CommonTextField from '../components/common/CommonTextField';
 import personalDetailSchema from '../validationSchema/personalDetailSchema';
 import { PersonalDetailInputs } from '../interfaces/formInterfaces';
+import renderFormInputs from '../utils/renderFormInputs';
+import { RenderFormInputArray } from '../interfaces/renderFormProps';
+
 
 export default function PersonalDetails() {
   const { handleSubmit, control, formState: { errors } } = useForm<PersonalDetailInputs>({
     resolver: yupResolver(personalDetailSchema),
   });
   const navigate = useNavigate();
+  
+  const formInputs: RenderFormInputArray = [
+    { type: "CommonInputField", name: "name", "label": "Name" },
+    { type: "CommonInputField", name: "email", "label": "Email" },
+    { type: "CommonInputField", name: "phone_num", "label": "Phone No." },
+    { type: "CommonInputField", name: "Address", "label": "Address" },
+  ]
 
   const onSubmit: SubmitHandler<PersonalDetailInputs> = (data) => {
     localStorage.setItem("name", data.name);
@@ -25,62 +35,7 @@ export default function PersonalDetails() {
           Personal Details
         </Typography>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="name"
-              control={control}
-              render={({ field }) => (
-                <CommonTextField
-                  {...field}
-                  label="Name"
-                  error={!!errors.name}
-                  helperText={errors.name?.message}
-                />
-              )}
-            />
-          </Box>
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="email"
-              control={control}
-              render={({ field }) => (
-                <CommonTextField
-                  {...field}
-                  label="Email"
-                  error={!!errors.email}
-                  helperText={errors.email?.message}
-                />
-              )}
-            />
-          </Box>
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="phone_num"
-              control={control}
-              render={({ field }) => (
-                <CommonTextField
-                  {...field}
-                  label="Phone No."
-                  error={!!errors.phone_num}
-                  helperText={errors.phone_num?.message}
-                />
-              )}
-            />
-          </Box>
-          <Box sx={{ mb: 3 }}>
-            <Controller
-              name="Address"
-              control={control}
-              render={({ field }) => (
-                <CommonTextField
-                  {...field}
-                  label="Address"
-                  error={!!errors.Address}
-                  helperText={errors.Address?.message}
-                />
-              )}
-            />
-          </Box>
+        {renderFormInputs({ inputs: formInputs, control, errors })}
           <Button type="submit" variant="contained" color="primary" fullWidth>
             Next
           </Button>

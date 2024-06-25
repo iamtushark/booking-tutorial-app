@@ -6,20 +6,16 @@ import { Container, Box, Button, Typography } from '@mui/material';
 import CommonTextField from '../components/common/CommonTextField';
 import CommonDropdown from '../components/common/CommonDropDownField';
 import serviceDetailSchema from '../validationSchema/serviceDetailSchema';
-
-interface IFormInputs {
-  vehicle_type: string;
-  vehicle_model_no: string;
-}
+import { ServiceDetailInputs } from '../interfaces/formInterfaces';
 
 export default function ServiceDetails() {
-  const { handleSubmit, control, formState: { errors } } = useForm<IFormInputs>({
+  const { handleSubmit, control, formState: { errors } } = useForm<ServiceDetailInputs>({
     defaultValues: { vehicle_type: 'type_1' },
     resolver: yupResolver(serviceDetailSchema),
   });
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<IFormInputs> = (data) => navigate('/booking_details');
+  const onSubmit: SubmitHandler<ServiceDetailInputs> = (data) => navigate('/booking_details');
 
   return (
     <Container maxWidth="sm">
